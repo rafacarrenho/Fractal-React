@@ -4,7 +4,7 @@ import { CssBaseline, ThemeProvider } from "@material-ui/core";
 import { theme } from "./styles/theme";
 import { MenuDrawer } from "./components/Drawer";
 import { Routes } from "./routes";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
 
 function App() {
   return (
