@@ -12,18 +12,16 @@ type ChartProps = {
   series: SeriesType[];
 };
 
-export const ChartRain = ({ series }: ChartProps) => {
-  const rainOptions: Highcharts.Options = {
+export const ChartGroupedRain = ({ series }: ChartProps) => {
+  const rainGroupedOptions: Highcharts.Options = {
     title: {
-      text: "Quantidade de chuva",
+      text: "Chuva acomulada por dia",
     },
     colors: ["#122A4E"],
     xAxis: {
       type: "category",
-      labels: {},
     },
     yAxis: {
-      reversed: true,
       title: {
         text: "Chuva (ml)",
       },
@@ -32,27 +30,22 @@ export const ChartRain = ({ series }: ChartProps) => {
       enabled: false,
     },
     tooltip: {
-      pointFormat: "Quantidade de chuva: <b>{point.y:.1f} ml</b>",
+      pointFormat: "Quantidade de chuva por dia: <b>{point.y:.1f} ml</b>",
     },
     series: [
       {
         type: "column",
         name: "Chuva",
-        data: series.map((item) => [item.date, item.chuva]),
+        data: series
+          .filter((item) => item.chuva)
+          .map((item) => [item.date, item.chuva]),
       },
     ],
   };
 
   return (
     <div>
-      <HighchartsReact
-        highcharts={Highcharts}
-        options={rainOptions}
-        allowChartUpdate={true}
-        immutable={false}
-        updateArgs={[true, true, true]}
-        containerProps={{ className: "chartContainer" }}
-      />
+      <HighchartsReact highcharts={Highcharts} options={rainGroupedOptions} />
     </div>
   );
 };

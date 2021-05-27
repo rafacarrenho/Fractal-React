@@ -6,9 +6,11 @@
 
 html,
 body,
-#__next {
+#root {
   height: 100vh;
+  width: 100%;
 }
+
 @media (max-width: 1080px) {
   html {
     font-size: 93.75%;
@@ -19,11 +21,6 @@ body,
   html {
     font-size: 87.5%;
   }
-}
-
-body {
-  background: var(--gray-900);
-  color: var(--white);
 }
 
 body,
@@ -39,11 +36,11 @@ button {
 }
 
 a {
-  // ASSUME A COR DO ELEMENTO PAI
   color: inherit;
   text-decoration: none;
 }
 
-.leaflet-control-attribution.leaflet-control {
+.leaflet-control-attribution.leaflet-control,
+.highcharts-credits {
   display: none;
 }

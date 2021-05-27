@@ -12,10 +12,10 @@ type ChartProps = {
   series: SeriesType[];
 };
 
-export const ChartRain = ({ series }: ChartProps) => {
+export const ChartLevel = ({ series }: ChartProps) => {
   const rainOptions: Highcharts.Options = {
     title: {
-      text: "Quantidade de chuva",
+      text: "Nivel do rio",
     },
     colors: ["#122A4E"],
     xAxis: {
@@ -23,7 +23,6 @@ export const ChartRain = ({ series }: ChartProps) => {
       labels: {},
     },
     yAxis: {
-      reversed: true,
       title: {
         text: "Chuva (ml)",
       },
@@ -32,14 +31,22 @@ export const ChartRain = ({ series }: ChartProps) => {
       enabled: false,
     },
     tooltip: {
-      pointFormat: "Quantidade de chuva: <b>{point.y:.1f} ml</b>",
+      pointFormat: "Nivel do rio: <b>{point.y:.1f} </b>",
     },
     series: [
       {
-        type: "column",
-        name: "Chuva",
-        data: series.map((item) => [item.date, item.chuva]),
+        type: "line",
+        name: "Nivel",
+        data: series.map((item) => [item.data_hora, Number(item.nivel)]),
       },
+      // {
+      //   type: "line",
+      //   name: "outra coisa",
+      //   data: series.map((item, index) => [
+      //     item.data_hora,
+      //     Number(item.nivel) + index / 2,
+      //   ]),
+      // },
     ],
   };
 
@@ -48,9 +55,6 @@ export const ChartRain = ({ series }: ChartProps) => {
       <HighchartsReact
         highcharts={Highcharts}
         options={rainOptions}
-        allowChartUpdate={true}
-        immutable={false}
-        updateArgs={[true, true, true]}
         containerProps={{ className: "chartContainer" }}
       />
     </div>

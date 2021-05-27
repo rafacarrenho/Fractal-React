@@ -13,8 +13,10 @@ import ListItemText from "@material-ui/core/ListItemText";
 import { makeStyles } from "@material-ui/core/styles";
 import AssessmentIcon from "@material-ui/icons/Assessment";
 import RoomIcon from "@material-ui/icons/Room";
-import { ReactNode, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import Logo from "../../assets/img/logo-white.svg";
+import { Link } from "react-router-dom";
+import * as Highcharts from "highcharts";
 
 const drawerWidth = 240;
 
@@ -61,7 +63,10 @@ const useStyles = makeStyles((theme) => ({
   },
   content: {
     height: "calc(100% - 60px)",
+    marginTop: "60px",
     flexGrow: 1,
+    overflowY: "scroll",
+    width: `100%`,
     padding: theme.spacing(3),
     transition: theme.transitions.create("margin", {
       easing: theme.transitions.easing.sharp,
@@ -92,6 +97,12 @@ export const MenuDrawer = ({ children }: MenuDrawerProps) => {
     setOpen(!open);
   };
 
+  useEffect(() => {
+    setTimeout(() => {
+      Highcharts?.charts.forEach((e) => e?.reflow());
+    }, 200);
+  }, [open]);
+
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -109,9 +120,9 @@ export const MenuDrawer = ({ children }: MenuDrawerProps) => {
           >
             <MenuIcon />
           </IconButton>
-          <a href="/">
+          <Link to="/">
             <img src={Logo} alt="Logo Fractal" />
-          </a>
+          </Link>
         </Toolbar>
       </AppBar>
       <Drawer
@@ -126,23 +137,23 @@ export const MenuDrawer = ({ children }: MenuDrawerProps) => {
         <div className={classes.drawerHeader}></div>
         <Divider />
         <List>
-          <a href="/graficos">
+          <Link to="/graficos">
             <ListItem button onClick={handleDrawer}>
               <ListItemIcon>
                 <AssessmentIcon />
               </ListItemIcon>
               <ListItemText primary={"Gráficos"} />
             </ListItem>
-          </a>
+          </Link>
 
-          <a href="/mapa">
+          <Link to="/mapa">
             <ListItem button onClick={handleDrawer}>
               <ListItemIcon>
                 <RoomIcon />
               </ListItemIcon>
               <ListItemText primary={"Mapa"} />
             </ListItem>
-          </a>
+          </Link>
         </List>
       </Drawer>
       <main
@@ -150,7 +161,6 @@ export const MenuDrawer = ({ children }: MenuDrawerProps) => {
           [classes.contentShift]: open,
         })}
       >
-        <div className={classes.drawerHeader} />
         {children}
       </main>
     </div>
