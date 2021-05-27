@@ -2,10 +2,8 @@ import * as Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 
 type SeriesType = {
-  nivel?: string;
-  chuva?: number;
-  date?: string;
-  data_hora?: string;
+  nivel: string;
+  data_hora: string;
 };
 
 type ChartProps = {

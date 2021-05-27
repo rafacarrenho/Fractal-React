@@ -15,7 +15,7 @@ import AssessmentIcon from "@material-ui/icons/Assessment";
 import RoomIcon from "@material-ui/icons/Room";
 import { ReactNode, useEffect, useState } from "react";
 import Logo from "../../assets/img/logo-white.svg";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import * as Highcharts from "highcharts";
 
 const drawerWidth = 240;
@@ -83,6 +83,17 @@ const useStyles = makeStyles((theme) => ({
     }),
     marginLeft: 0,
   },
+  activeLink: {
+    backgroundColor: theme.palette.primary.main,
+    color: "white",
+    "& svg": {
+      color: "white",
+    },
+    "&:hover": {
+      backgroundColor: theme.palette.primary.main,
+      color: "white",
+    },
+  },
 }));
 
 type MenuDrawerProps = {
@@ -137,23 +148,30 @@ export const MenuDrawer = ({ children }: MenuDrawerProps) => {
         <div className={classes.drawerHeader}></div>
         <Divider />
         <List>
-          <Link to="/graficos">
-            <ListItem button onClick={handleDrawer}>
-              <ListItemIcon>
-                <AssessmentIcon />
-              </ListItemIcon>
-              <ListItemText primary={"Gráficos"} />
-            </ListItem>
-          </Link>
-
-          <Link to="/mapa">
-            <ListItem button onClick={handleDrawer}>
-              <ListItemIcon>
-                <RoomIcon />
-              </ListItemIcon>
-              <ListItemText primary={"Mapa"} />
-            </ListItem>
-          </Link>
+          <ListItem
+            button
+            onClick={handleDrawer}
+            component={NavLink}
+            to="/graficos"
+            activeClassName={classes.activeLink}
+          >
+            <ListItemIcon>
+              <AssessmentIcon />
+            </ListItemIcon>
+            <ListItemText primary={"Gráficos"} />
+          </ListItem>
+          <ListItem
+            button
+            onClick={handleDrawer}
+            component={NavLink}
+            to="/mapa"
+            activeClassName={classes.activeLink}
+          >
+            <ListItemIcon>
+              <RoomIcon />
+            </ListItemIcon>
+            <ListItemText primary={"Mapa"} />
+          </ListItem>
         </List>
       </Drawer>
       <main
