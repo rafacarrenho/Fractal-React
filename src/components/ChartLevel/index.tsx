@@ -13,7 +13,6 @@ type ChartProps = {
 
 export const ChartLevel = ({ series }: ChartProps) => {
   let levelSixHoursRange: SeriesType[] = levelByRange(series);
-  console.log(levelSixHoursRange);
 
   const rainOptions: Highcharts.Options = {
     title: {
@@ -37,12 +36,12 @@ export const ChartLevel = ({ series }: ChartProps) => {
     series: [
       {
         type: "line",
-        name: "Por hora",
+        name: "Nivel do rio - Por hora",
         data: series.map((item) => [item.data_hora, Number(item.nivel)]),
       },
       {
         type: "line",
-        name: "Média a cada 6 horas",
+        name: "Nivel do rio - Média a cada 6 horas",
         data: levelSixHoursRange.map((item) => [
           item.data_hora,
           Number(item.nivel),
