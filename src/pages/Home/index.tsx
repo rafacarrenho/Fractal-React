@@ -1,26 +1,10 @@
-import { makeStyles, Typography } from "@material-ui/core";
-
-const useStyles = makeStyles((theme) => ({
-  homeMain: {
-    width: "100%",
-    height: "100%",
-    display: "flex",
-    flexDirection: "column",
-    alignContent: "center",
-    justifyContent: "center",
-    textAlign: "center",
-  },
-  title: {
-    fontWeight: 700,
-    marginBottom: 40,
-  },
-}));
+import { Typography } from "@material-ui/core";
+import styles from "./styles.module.css";
 
 export const Home = () => {
-  const classes = useStyles();
   return (
-    <div className={classes.homeMain}>
-      <Typography variant="h3" component="h1" className={classes.title}>
+    <div className={styles.wrapper}>
+      <Typography variant="h3" component="h1" className={styles.title}>
         Bem vindo à<br />
         Fractal Engenharia
       </Typography>

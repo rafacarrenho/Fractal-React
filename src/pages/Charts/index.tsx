@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { ChartGroupedRain } from "../../components/ChartGroupedRain";
 import { ChartLevel } from "../../components/ChartLevel";
 import { ChartRain } from "../../components/ChartRain";
+import { Error } from "../../components/Error";
+import { Loading } from "../../components/Loading";
 import { api } from "../../services/api";
 
 type SeriesType = {
@@ -14,6 +16,8 @@ type SeriesType = {
 
 export const Charts = () => {
   const [series, setSeries] = useState([] as SeriesType[]);
+  const [error, setError] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const rainSerie = (series: SeriesType[]) => {
     return series
@@ -50,12 +54,21 @@ export const Charts = () => {
   };
 
   useEffect(() => {
-    api.get("series.json").then((res) => {
-      setSeries(res.data);
-    });
+    api
+      .get("series.json")
+      .then((res) => {
+        setSeries(res.data);
+      })
+      .catch(() => {
+        setError(true);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   }, []);
 
-  if (!series.length) return null;
+  if (isLoading) return <Loading />;
+  if (error) return <Error />;
   return (
     <div style={{ width: "100%" }}>
       <Grid container spacing={2}>
