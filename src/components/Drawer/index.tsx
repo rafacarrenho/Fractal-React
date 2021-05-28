@@ -94,6 +94,9 @@ const useStyles = makeStyles((theme) => ({
       color: "white",
     },
   },
+  logoImg: {
+    height: "40px",
+  },
 }));
 
 type MenuDrawerProps = {
@@ -132,7 +135,7 @@ export const MenuDrawer = ({ children }: MenuDrawerProps) => {
             <MenuIcon />
           </IconButton>
           <Link to="/">
-            <img src={Logo} alt="Logo Fractal" />
+            <img src={Logo} alt="Logo Fractal" className={classes.logoImg} />
           </Link>
         </Toolbar>
       </AppBar>

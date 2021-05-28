@@ -2,10 +2,8 @@ import * as Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 
 type SeriesType = {
-  nivel?: string;
-  chuva?: number;
-  date?: string;
-  data_hora?: string;
+  chuva: number;
+  data_hora: string | number;
 };
 
 type ChartProps = {
@@ -29,7 +27,9 @@ export const ChartRain = ({ series }: ChartProps) => {
       },
     },
     legend: {
-      enabled: false,
+      layout: "horizontal",
+      align: "center",
+      verticalAlign: "bottom",
     },
     tooltip: {
       pointFormat: "Quantidade de chuva: <b>{point.y:.1f} ml</b>",
@@ -38,7 +38,7 @@ export const ChartRain = ({ series }: ChartProps) => {
       {
         type: "column",
         name: "Chuva",
-        data: series.map((item) => [item.date, item.chuva]),
+        data: series.map((item) => [item.data_hora, item.chuva]),
       },
     ],
   };
@@ -48,9 +48,6 @@ export const ChartRain = ({ series }: ChartProps) => {
       <HighchartsReact
         highcharts={Highcharts}
         options={rainOptions}
-        allowChartUpdate={true}
-        immutable={false}
-        updateArgs={[true, true, true]}
         containerProps={{ className: "chartContainer" }}
       />
     </div>

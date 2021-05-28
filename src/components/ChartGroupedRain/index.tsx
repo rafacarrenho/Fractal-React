@@ -13,7 +13,7 @@ type ChartProps = {
 export const ChartGroupedRain = ({ series }: ChartProps) => {
   const rainGroupedOptions: Highcharts.Options = {
     title: {
-      text: "Chuva acomulada por dia",
+      text: "Chuva acumulada por dia",
     },
     colors: ["#122A4E"],
     xAxis: {
@@ -25,15 +25,14 @@ export const ChartGroupedRain = ({ series }: ChartProps) => {
       },
     },
     legend: {
-      enabled: false,
-    },
-    tooltip: {
-      pointFormat: "Quantidade de chuva por dia: <b>{point.y:.1f} ml</b>",
+      layout: "horizontal",
+      align: "center",
+      verticalAlign: "bottom",
     },
     series: [
       {
         type: "column",
-        name: "Chuva",
+        name: "Chuva acumulada por dia",
         data: series
           .filter((item) => item.chuva)
           .map((item) => [item.date, item.chuva]),

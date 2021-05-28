@@ -1,3 +1,4 @@
+import { Grid } from "@material-ui/core";
 import { useEffect, useState } from "react";
 import { ChartGroupedRain } from "../../components/ChartGroupedRain";
 import { ChartLevel } from "../../components/ChartLevel";
@@ -18,8 +19,8 @@ export const Charts = () => {
     return series
       .filter((item) => item.chuva)
       .map((item) => {
-        const date = item.data_hora;
-        return { date, chuva: item.chuva };
+        const data_hora = item.data_hora;
+        return { data_hora, chuva: item.chuva };
       });
   };
 
@@ -57,9 +58,17 @@ export const Charts = () => {
   if (!series.length) return null;
   return (
     <div style={{ width: "100%" }}>
-      <ChartRain series={rainSerie(series)} />
-      <ChartGroupedRain series={groupedRainSerie(series)} />
-      <ChartLevel series={levelSerie(series)} />
+      <Grid container spacing={2}>
+        <Grid item xs={12} md={6}>
+          <ChartRain series={rainSerie(series)} />
+        </Grid>
+        <Grid item xs={12} md={6}>
+          <ChartGroupedRain series={groupedRainSerie(series)} />
+        </Grid>
+      </Grid>
+      <Grid item xs={12} md={6}>
+        <ChartLevel series={levelSerie(series)} />
+      </Grid>
     </div>
   );
 };

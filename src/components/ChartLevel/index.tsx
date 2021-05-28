@@ -1,8 +1,9 @@
 import * as Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
+import { levelByRange } from "./util";
 
 type SeriesType = {
-  nivel: string;
+  nivel: string | number;
   data_hora: string;
 };
 
@@ -11,11 +12,14 @@ type ChartProps = {
 };
 
 export const ChartLevel = ({ series }: ChartProps) => {
+  let levelSixHoursRange: SeriesType[] = levelByRange(series);
+  console.log(levelSixHoursRange);
+
   const rainOptions: Highcharts.Options = {
     title: {
       text: "Nivel do rio",
     },
-    colors: ["#122A4E"],
+    colors: ["#122A4E", "red"],
     xAxis: {
       type: "category",
       labels: {},
@@ -26,25 +30,24 @@ export const ChartLevel = ({ series }: ChartProps) => {
       },
     },
     legend: {
-      enabled: false,
-    },
-    tooltip: {
-      pointFormat: "Nivel do rio: <b>{point.y:.1f} </b>",
+      layout: "horizontal",
+      align: "center",
+      verticalAlign: "bottom",
     },
     series: [
       {
         type: "line",
-        name: "Nivel",
+        name: "Por hora",
         data: series.map((item) => [item.data_hora, Number(item.nivel)]),
       },
-      // {
-      //   type: "line",
-      //   name: "outra coisa",
-      //   data: series.map((item, index) => [
-      //     item.data_hora,
-      //     Number(item.nivel) + index / 2,
-      //   ]),
-      // },
+      {
+        type: "line",
+        name: "Média a cada 6 horas",
+        data: levelSixHoursRange.map((item) => [
+          item.data_hora,
+          Number(item.nivel),
+        ]),
+      },
     ],
   };
 
@@ -58,3 +61,6 @@ export const ChartLevel = ({ series }: ChartProps) => {
     </div>
   );
 };
+function item(item: any, arg1: (SeriesType: any) => any): SeriesType[] {
+  throw new Error("Function not implemented.");
+}
