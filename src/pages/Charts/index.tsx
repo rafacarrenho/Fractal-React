@@ -6,7 +6,7 @@ import { ChartRain } from "../../components/ChartRain";
 import { api } from "../../services/api";
 
 type SeriesType = {
-  nivel: string;
+  nivel: number;
   chuva: number;
   date: string;
   data_hora: string;

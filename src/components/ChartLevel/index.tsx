@@ -3,7 +3,7 @@ import HighchartsReact from "highcharts-react-official";
 import { levelByRange } from "./util";
 
 type SeriesType = {
-  nivel: string | number;
+  nivel: number;
   data_hora: string;
 };
 
@@ -12,7 +12,7 @@ type ChartProps = {
 };
 
 export const ChartLevel = ({ series }: ChartProps) => {
-  let levelSixHoursRange: SeriesType[] = levelByRange(series);
+  let levelSixHoursRange = levelByRange(series);
 
   const rainOptions: Highcharts.Options = {
     title: {
@@ -60,6 +60,3 @@ export const ChartLevel = ({ series }: ChartProps) => {
     </div>
   );
 };
-function item(item: any, arg1: (SeriesType: any) => any): SeriesType[] {
-  throw new Error("Function not implemented.");
-}
