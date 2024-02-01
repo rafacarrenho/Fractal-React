@@ -1,15 +1,14 @@
-import { Route, Switch } from "react-router-dom";
-
+import { Routes as RoutesLib, Route } from "react-router-dom";
 import { Charts } from "../pages/Charts";
 import { Home } from "../pages/Home";
 import { Maps } from "../pages/Maps";
 
 export const Routes = () => {
   return (
-    <Switch>
-      <Route path={`${process.env.PUBLIC_URL}/mapa`} component={Maps} />
-      <Route path={`${process.env.PUBLIC_URL}/graficos`} component={Charts} />
-      <Route path={`${process.env.PUBLIC_URL}/`} component={Home} />
-    </Switch>
+    <RoutesLib>
+      <Route path={`${process.env.PUBLIC_URL}/mapa`} element={<Maps />} />
+      <Route path={`${process.env.PUBLIC_URL}/graficos`} element={<Charts />} />
+      <Route path={`${process.env.PUBLIC_URL}/`} element={<Home />} />
+    </RoutesLib>
   );
 };

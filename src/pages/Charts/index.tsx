@@ -6,16 +6,10 @@ import { ChartRain } from "../../components/ChartRain";
 import { Error } from "../../components/Error";
 import { Loading } from "../../components/Loading";
 import { api } from "../../services/api";
-
-type SeriesType = {
-  nivel: number;
-  chuva: number;
-  date: string;
-  data_hora: string;
-};
+import { SeriesType } from "./types";
 
 export const Charts = () => {
-  const [series, setSeries] = useState([] as SeriesType[]);
+  const [series, setSeries] = useState<SeriesType[]>([]);
   const [error, setError] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -55,7 +49,7 @@ export const Charts = () => {
 
   useEffect(() => {
     api
-      .get("series.json")
+      .get("chart")
       .then((res) => {
         setSeries(res.data);
       })
